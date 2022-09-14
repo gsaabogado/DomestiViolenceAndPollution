@@ -10,5 +10,6 @@ library(knitr)
 library(readr)
 # Dates
 library(lubridate)
+library(zoo)
 #### Solve conflicts ####
 conflict_prefer("filter", "dplyr")

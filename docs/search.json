@@ -4,12 +4,12 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "Raw data files\nAs previously mentioned, the folder 01_RawData folder contains all the raw files I obtained to estimate the effect of air quality health advisories on school absences.\n01_schools includes all files related to school absences and school characteristics in New York City. 02_AQI has the data on the air quality index forecast from the NYSDEC and the AQI measures from the EPA. 03_weather contains several data files of weather covariates. 04_shp is a repository of shape (or spatial) files. And 05_dem includes data on neighborhood-level socio-demographic characteristics from the US Census Buro.\n\n\n\n\n\nFootnotes\n\n\nI recommend downloading the files to an external hard drive to avoid memory issues↩︎"
   },
   {
     "objectID": "01_data.html",
     "href": "01_data.html",
-    "title": "Air Pollution and Domestic Violence",
+    "title": "Description of Data Sources",
     "section": "",
     "text": "Summary Statistics and Final Dataset Creation\n[Here instead write how we linked the data together and focus more on summary statistics, etc. ]\nWe focus on the sample of hospitals in the greater Mexico City area (Mexico Valley), which is composed of 16 muncipalities in Mexico City with 9,209,944 peopole, 59 municipalities in the state of Mexico with 12,437,287 people, and 1 municipality in the state of Hidalgo with 168,302 people. https://es.wikipedia.org/wiki/Zona_metropolitana_del_valle_de_México\nWe further restrict our sample to active establishments that are used for hospitalization purposes and omit psychiatric hospitals. Given changes in the reporting requirements starting in 2013, we only use data from that year onward."
   }
