@@ -1,0 +1,142 @@
+---
+title: "Air Pollution and Domestic Violence"
+author: "Ireri Hernandez and Luis Sarmiento"
+format: 
+  html: 
+    toc: true
+    warning: false
+    code-fold: true
+    code-summary: "Show the Code"
+---
+
+# Data 
+
+```{r}
+wd = gsub("web-page", "", getwd())
+injuries = read_rds(paste0(wd, "/02_GenData/01_accidents/AccidentsRaw.rds"))
+```
+
+## Injuries
+
+We obtain administrative data on hospitalizations from Mexico's national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019. The raw data set contains all injuries and accidents reported by (public) all hospitals in Mexico between `r month(min(injuries$date), label = T)` `r year(min(injuries$date))` and `r month(max(injuries$date), label = T)` `r year(max(injuries$date))`. In total, the data set contains `r comma(nrow(injuries))` observations across `r comma(length(unique(injuries$Clues)))` hospitals. 
+
+[Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]
+
+![MX Hospitalization Registration Form. Note: find a better way to display this.](Formato_Lesiones_2021.pdf)
+
+The following set of tables contain the main variables we use in our analysis. First, @tbl-RawIdentifiers contains spatial case identifiers as the hospital id (CLUES) identification code alongside the state and county of the observation. @tbl-RawTimeStamp includes the date and time of the accident and the date and time of the hospitalization. Additionally, it includes an indicator variable when the accident occurred during a holiday .
+
+Next
+
+::: panel-tabset
+## Identifiers
+```{r}
+#| label: tbl-RawIdentifiers
+#| tbl-cap: Spatial case identifiers
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(select(injuries, id:county) %>%  head(.)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") |> 
+   footnote(general = "id = Case ID; Clues = Hospital Identifier; state = Numeric code for the federal state; county = Numeric code for the municipality", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+
+## Time Stamps
+```{r}
+#| label: tbl-RawTimeStamp
+#| tbl-cap: Temporal case identifiers
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(select(injuries, id, date:HospHour, festivity) %>%  head(.)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") |> 
+   footnote(general = "id = Case ID; date = Date of the accident; hour = Hour of the accident, HospDate = Date of Hospitalization, HospHour = Hour of Hospitalization; festivity = Answer to the question, did the event occur during a holiday or festivity? 1 -- Yes, 2-- No", general_title = "Notes:", footnote_as_chunk = T)
+
+## Demographics
+```{r}
+#| label: tbl-RawDemographics
+#| tbl-cap: Demographic characteristics of the patient
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(select(injuries, id, age:educ) %>%  head(.)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") |> 
+   footnote(general = "id = Case ID -- Clues = Hospital Identifier -- state = Numeric code for the federal state --
+             county = Numeric code for the municipality -- age = Age of the victim -- gender = (1) Male", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+## Demographics
+```{r}
+#| label: tbl-PatientDemographics
+#| tbl-cap: Demographics of the patient
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(select(injuries, id, age:educ) %>%  head(.)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") |> 
+   footnote(general = "id = Case ID, age = Age of the patient, gender = Gender of the patient, literacy = Literaciy of the patient (1 yes and 2 no), educ = Education of the patient (0 Not Specified, 1 No Education, 31 = Completed Primary School, 32 = Incomplete Primary School)", general_title = "Notes:", footnote_as_chunk = T)
+```
+## Accident Characteristics
+```{r}
+#| label: tbl-CaseCharacteristics
+#| tbl-cap: Characteristics of the case
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(select(injuries, id, icd10, place:ambulance, Service) %>%  head(.)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") |> 
+   footnote(general = "id = Case ID -- Clues = Hospital Identifier -- state = Numeric code for the federal state --
+             county = Numeric code for the municipality -- age = Age of the victim -- gender = (1) Male", general_title = "Notes:", footnote_as_chunk = T)
+```
+
+## Assailant
+```{r}
+#| label: tbl-RawAssailant
+#| tbl-cap: Charateristics of the assailant
+#| tbl-cap-location: top
+#| echo: true
+# Show the data set
+kbl(select(injuries, id, Nassailants:AssailantRelation) %>%  head(.)) %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  kable_styling(bootstrap_option = c("hover")) |> 
+  column_spec(c(1), italic = T, color = "DarkBlue") |> 
+   footnote(general = "id = Case ID; Nassailant = Number of assailants; AssailantAge = Age of the assailant; AssailantSex = Gender of the assailant; AssailantRelation = Relationship between the victim and tha assailant", general_title = "Notes:", footnote_as_chunk = T)
+```
+:::
+
+
+## Hospital Controls
+We obtain hospital characteristics from the Mexican health ministry registry of health establishments, which contains for each hospital a unique health establishment code (CLUES) alongside other hospital characteristics such as location, type of establishment (e.g. hospitalization, social support, external consultation), total number of beds and doctors offices, operating status, longitude and latitude. 
+
+[TODO: Add sample table like above]
+
+## Air Pollution
+Air pollution data comes from the center for atmospheric information of Mexico City (Direccion de Monitoreo Armosferico de la Ciudad de Mexico) and contains hourly observations of the primary criteria pollutants: carbon monoxide (CO), coarse particulate matter (PM10), fine particulate matter (PM25), nitrogen dioxide (NO2), ozone (O3), and sulfur dioxide (SO2). The data contains for each station, the station code, latitude and longitude, and the date and hour when the reading was collected. 
+
+[TODO: Add sample table like above, and talk about the construction of AQI,and imputations, etc]
+
+## Weather
+
+The weather data comes from 34 weather stations from the atmospheric monitoring system of Mexico City (Sistema de Monitoreo Atmosférico, SIMAT). The data contains temperature, relative humidity, atmospheric pressure, wind speed, and wind direction. We download daily rain data in Mexico from from the Global Surface Summary of the Day (GSOD) data provided by the US National Centers for Environmental Information (NCEI), which contains daily data on rain, minimum temperature, and maximum temperature, and for each station, the id number, latitude and longitude.  
+
+[TODO: Add sample table like above]
+
+# Summary Statistics and Final Dataset Creation 
+[Here instead write how we linked the data together and focus more on summary statistics, etc. ]
+
+We focus on the sample of hospitals in the greater Mexico City area (Mexico Valley), which is composed of 16 muncipalities in Mexico City with 9,209,944 peopole, 59 municipalities in the state of Mexico with 12,437,287 people, and 1 municipality in the state of Hidalgo with 168,302 people. https://es.wikipedia.org/wiki/Zona_metropolitana_del_valle_de_México 
+
+We further restrict our sample to active establishments that are used for hospitalization purposes and omit psychiatric hospitals. Given changes in the reporting requirements starting in 2013, we only use data from that year onward. 
+
+

@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "01_data.html",
+    "href": "01_data.html",
+    "title": "Air Pollution and Domestic Violence",
+    "section": "",
+    "text": "Summary Statistics and Final Dataset Creation\n[Here instead write how we linked the data together and focus more on summary statistics, etc. ]\nWe focus on the sample of hospitals in the greater Mexico City area (Mexico Valley), which is composed of 16 muncipalities in Mexico City with 9,209,944 peopole, 59 municipalities in the state of Mexico with 12,437,287 people, and 1 municipality in the state of Hidalgo with 168,302 people. https://es.wikipedia.org/wiki/Zona_metropolitana_del_valle_de_México\nWe further restrict our sample to active establishments that are used for hospitalization purposes and omit psychiatric hospitals. Given changes in the reporting requirements starting in 2013, we only use data from that year onward."
+  }
+]

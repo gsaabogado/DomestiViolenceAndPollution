@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ireri Hernandez and Luis Sarmiento">
+
+<title>Air Pollution Exposure and Domestic Violence: Evidence From Mexico City - Air Pollution and Domestic Violence</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Air Pollution Exposure and Domestic Violence: Evidence From Mexico City</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./about.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/gsaabogado"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/gsaabogado"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://luissarmiento.net/">Personal Site</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Air Pollution and Domestic Violence</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Sections</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./about.html" class="sidebar-item-text sidebar-link">About</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_data.html" class="sidebar-item-text sidebar-link active">Air Pollution and Domestic Violence</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a>
+  <ul class="collapse">
+  <li><a href="#injuries" id="toc-injuries" class="nav-link" data-scroll-target="#injuries">Injuries</a></li>
+  <li><a href="#hospital-controls" id="toc-hospital-controls" class="nav-link" data-scroll-target="#hospital-controls">Hospital Controls</a></li>
+  <li><a href="#air-pollution" id="toc-air-pollution" class="nav-link" data-scroll-target="#air-pollution">Air Pollution</a></li>
+  <li><a href="#weather" id="toc-weather" class="nav-link" data-scroll-target="#weather">Weather</a></li>
+  </ul></li>
+  <li><a href="#summary-statistics-and-final-dataset-creation" id="toc-summary-statistics-and-final-dataset-creation" class="nav-link" data-scroll-target="#summary-statistics-and-final-dataset-creation">Summary Statistics and Final Dataset Creation</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Air Pollution and Domestic Violence</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ireri Hernandez and Luis Sarmiento </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="data" class="level1">
+<h1>Data</h1>
+<div class="cell">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"web-page"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>injuries <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(wd, <span class="st">"/02_GenData/01_accidents/AccidentsRaw.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="injuries" class="level2">
+<h2 class="anchored" data-anchor-id="injuries">Injuries</h2>
+<p>We obtain administrative data on hospitalizations from Mexico’s national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019. The raw data set contains all injuries and accidents reported by (public) all hospitals in Mexico between Jan 1900 and Sep 9999. In total, the data set contains 6,095,753 observations across 0 hospitals.</p>
+<p>[Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="Formato_Lesiones_2021.pdf" class="img-fluid"></p>
+<p></p><figcaption class="figure-caption">MX Hospitalization Registration Form. Note: find a better way to display this.</figcaption><p></p>
+</figure>
+</div>
+<p>The following set of tables contain the main variables we use in our analysis. First, <a href="#tbl-RawIdentifiers">Table&nbsp;1</a> contains spatial case identifiers as the hospital id (CLUES) identification code alongside the state and county of the observation. <a href="#tbl-RawTimeStamp">Table&nbsp;2</a> includes the date and time of the accident and the date and time of the hospitalization. Additionally, it includes an indicator variable when the accident occurred during a holiday .</p>
+<p>Next</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Identifiers</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Time Stamps</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Demographics</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Accident Characteristics</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Assailant</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the data set</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">select</span>(injuries, id<span class="sc">:</span>county) <span class="sc">%&gt;%</span>  <span class="fu">head</span>(.)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> T, <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="fu">c</span>(<span class="dv">1</span>), <span class="at">italic =</span> T, <span class="at">color =</span> <span class="st">"DarkBlue"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"id = Case ID; Clues = Hospital Identifier; state = Numeric code for the federal state; county = Numeric code for the municipality"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-RawIdentifiers" class="anchored">
+
+<table class=" lightable-classic table table-hover" style="font-family: Cambria; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>Table 1:  Spatial case identifiers </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> id </th>
+   <th style="text-align:left;"> hid </th>
+   <th style="text-align:right;"> state </th>
+   <th style="text-align:right;"> county </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
+   <td style="text-align:left;"> MNSSA000030 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
+   <td style="text-align:left;"> MNSSA000030 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
+   <td style="text-align:left;"> MNSSA000030 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
+   <td style="text-align:left;"> MNSSA000030 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
+   <td style="text-align:left;"> MNSSA000030 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
+   <td style="text-align:left;"> MNSSA000030 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> id = Case ID; Clues = Hospital Identifier; state = Numeric code for the federal state; county = Numeric code for the municipality</td></tr></tfoot>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the data set</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">select</span>(injuries, id, date<span class="sc">:</span>HospHour, festivity) <span class="sc">%&gt;%</span>  <span class="fu">head</span>(.)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> T, <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="fu">c</span>(<span class="dv">1</span>), <span class="at">italic =</span> T, <span class="at">color =</span> <span class="st">"DarkBlue"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"id = Case ID; date = Date of the accident; hour = Hour of the accident, HospDate = Date of Hospitalization, HospHour = Hour of Hospitalization; festivity = Answer to the question, did the event occur during a holiday or festivity? 1 -- Yes, 2-- No"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-RawTimeStamp" class="anchored">
+
+<table class=" lightable-classic table table-hover" style="font-family: Cambria; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>Table 2:  Temporal case identifiers </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> id </th>
+   <th style="text-align:left;"> date </th>
+   <th style="text-align:left;"> hour </th>
+   <th style="text-align:left;"> HospDate </th>
+   <th style="text-align:left;"> HospHour </th>
+   <th style="text-align:right;"> festivity </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
+   <td style="text-align:left;"> 2010-05-19 </td>
+   <td style="text-align:left;"> 12:30 </td>
+   <td style="text-align:left;"> 2010-05-19 </td>
+   <td style="text-align:left;"> 12:30 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
+   <td style="text-align:left;"> 2010-04-28 </td>
+   <td style="text-align:left;"> 14:00 </td>
+   <td style="text-align:left;"> 2010-04-28 </td>
+   <td style="text-align:left;"> 14:15 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
+   <td style="text-align:left;"> 2010-04-28 </td>
+   <td style="text-align:left;"> 14:00 </td>
+   <td style="text-align:left;"> 2010-04-28 </td>
+   <td style="text-align:left;"> 14:15 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
+   <td style="text-align:left;"> 2011-06-25 </td>
+   <td style="text-align:left;"> 20:40 </td>
+   <td style="text-align:left;"> 2011-06-25 </td>
+   <td style="text-align:left;"> 20:50 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
+   <td style="text-align:left;"> 2011-06-01 </td>
+   <td style="text-align:left;"> 11:50 </td>
+   <td style="text-align:left;"> 2011-06-01 </td>
+   <td style="text-align:left;"> 12:05 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
+   <td style="text-align:left;"> 2011-06-26 </td>
+   <td style="text-align:left;"> 12:00 </td>
+   <td style="text-align:left;"> 2011-06-26 </td>
+   <td style="text-align:left;"> 18:30 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> id = Case ID; date = Date of the accident; hour = Hour of the accident, HospDate = Date of Hospitalization, HospHour = Hour of Hospitalization; festivity = Answer to the question, did the event occur during a holiday or festivity? 1 -- Yes, 2-- No</td></tr></tfoot>
+</table>
+
+</div>
+</div>
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Demographics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the data set</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">select</span>(injuries, id, age<span class="sc">:</span>educ) <span class="sc">%&gt;%</span>  <span class="fu">head</span>(.)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> T, <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="fu">c</span>(<span class="dv">1</span>), <span class="at">italic =</span> T, <span class="at">color =</span> <span class="st">"DarkBlue"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"id = Case ID -- Clues = Hospital Identifier -- state = Numeric code for the federal state --</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">             county = Numeric code for the municipality -- age = Age of the victim -- gender = (1) Male"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-RawDemographics" class="anchored">
+
+<table class=" lightable-classic table table-hover" style="font-family: Cambria; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>Table 3:  Demographic characteristics of the patient </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> id </th>
+   <th style="text-align:right;"> age </th>
+   <th style="text-align:right;"> gender </th>
+   <th style="text-align:right;"> literacy </th>
+   <th style="text-align:right;"> educ </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 6 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> id = Case ID -- Clues = Hospital Identifier -- state = Numeric code for the federal state --<br>             county = Numeric code for the municipality -- age = Age of the victim -- gender = (1) Male</td></tr></tfoot>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the data set</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">select</span>(injuries, id, age<span class="sc">:</span>educ) <span class="sc">%&gt;%</span>  <span class="fu">head</span>(.)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> T, <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="fu">c</span>(<span class="dv">1</span>), <span class="at">italic =</span> T, <span class="at">color =</span> <span class="st">"DarkBlue"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"id = Case ID, age = Age of the patient, gender = Gender of the patient, literacy = Literaciy of the patient (1 yes and 2 no), educ = Education of the patient (0 Not Specified, 1 No Education, 31 = Completed Primary School, 32 = Incomplete Primary School)"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-PatientDemographics" class="anchored">
+
+<table class=" lightable-classic table table-hover" style="font-family: Cambria; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>Table 4:  Demographics of the patient </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> id </th>
+   <th style="text-align:right;"> age </th>
+   <th style="text-align:right;"> gender </th>
+   <th style="text-align:right;"> literacy </th>
+   <th style="text-align:right;"> educ </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
+   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 6 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> id = Case ID, age = Age of the patient, gender = Gender of the patient, literacy = Literaciy of the patient (1 yes and 2 no), educ = Education of the patient (0 Not Specified, 1 No Education, 31 = Completed Primary School, 32 = Incomplete Primary School)</td></tr></tfoot>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the data set</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">select</span>(injuries, id, icd10, place<span class="sc">:</span>ambulance, Service) <span class="sc">%&gt;%</span>  <span class="fu">head</span>(.)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> T, <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="fu">c</span>(<span class="dv">1</span>), <span class="at">italic =</span> T, <span class="at">color =</span> <span class="st">"DarkBlue"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"id = Case ID -- Clues = Hospital Identifier -- state = Numeric code for the federal state --</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">             county = Numeric code for the municipality -- age = Age of the victim -- gender = (1) Male"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-CaseCharacteristics" class="anchored">
+
+<table class=" lightable-classic table table-hover" style="font-family: Cambria; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>Table 5:  Characteristics of the case </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> id </th>
+   <th style="text-align:left;"> icd10 </th>
+   <th style="text-align:right;"> place </th>
+   <th style="text-align:right;"> agent </th>
+   <th style="text-align:right;"> BodyRegion </th>
+   <th style="text-align:right;"> MainConsequence </th>
+   <th style="text-align:right;"> ambulance </th>
+   <th style="text-align:right;"> Service </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
+   <td style="text-align:left;"> T630 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
+   <td style="text-align:left;"> S518 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
+   <td style="text-align:left;"> S202 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
+   <td style="text-align:left;"> T044 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
+   <td style="text-align:left;"> S807 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
+   <td style="text-align:left;"> S422 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> id = Case ID -- Clues = Hospital Identifier -- state = Numeric code for the federal state --<br>             county = Numeric code for the municipality -- age = Age of the victim -- gender = (1) Male</td></tr></tfoot>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<div class="cell tbl-cap-location-top">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the data set</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">select</span>(injuries, id, Nassailants<span class="sc">:</span>AssailantRelation) <span class="sc">%&gt;%</span>  <span class="fu">head</span>(.)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> T, <span class="at">html_font =</span> <span class="st">"Cambria"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_option =</span> <span class="fu">c</span>(<span class="st">"hover"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="fu">c</span>(<span class="dv">1</span>), <span class="at">italic =</span> T, <span class="at">color =</span> <span class="st">"DarkBlue"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">footnote</span>(<span class="at">general =</span> <span class="st">"id = Case ID; Nassailant = Number of assailants; AssailantAge = Age of the assailant; AssailantSex = Gender of the assailant; AssailantRelation = Relationship between the victim and tha assailant"</span>, <span class="at">general_title =</span> <span class="st">"Notes:"</span>, <span class="at">footnote_as_chunk =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="tbl-RawAssailant" class="anchored">
+
+<table class=" lightable-classic table table-hover" style="font-family: Cambria; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;"><caption>Table 6:  Charateristics of the assailant </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> id </th>
+   <th style="text-align:right;"> Nassailants </th>
+   <th style="text-align:left;"> AssailantAge </th>
+   <th style="text-align:right;"> AssailantSex </th>
+   <th style="text-align:right;"> AssailantRelation </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> 15 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> 37 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Notes:</span> <sup></sup> id = Case ID; Nassailant = Number of assailants; AssailantAge = Age of the assailant; AssailantSex = Gender of the assailant; AssailantRelation = Relationship between the victim and tha assailant</td></tr></tfoot>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="hospital-controls" class="level2">
+<h2 class="anchored" data-anchor-id="hospital-controls">Hospital Controls</h2>
+<p>We obtain hospital characteristics from the Mexican health ministry registry of health establishments, which contains for each hospital a unique health establishment code (CLUES) alongside other hospital characteristics such as location, type of establishment (e.g.&nbsp;hospitalization, social support, external consultation), total number of beds and doctors offices, operating status, longitude and latitude.</p>
+<p>[TODO: Add sample table like above]</p>
+</section>
+<section id="air-pollution" class="level2">
+<h2 class="anchored" data-anchor-id="air-pollution">Air Pollution</h2>
+<p>Air pollution data comes from the center for atmospheric information of Mexico City (Direccion de Monitoreo Armosferico de la Ciudad de Mexico) and contains hourly observations of the primary criteria pollutants: carbon monoxide (CO), coarse particulate matter (PM10), fine particulate matter (PM25), nitrogen dioxide (NO2), ozone (O3), and sulfur dioxide (SO2). The data contains for each station, the station code, latitude and longitude, and the date and hour when the reading was collected.</p>
+<p>[TODO: Add sample table like above, and talk about the construction of AQI,and imputations, etc]</p>
+</section>
+<section id="weather" class="level2">
+<h2 class="anchored" data-anchor-id="weather">Weather</h2>
+<p>The weather data comes from 34 weather stations from the atmospheric monitoring system of Mexico City (Sistema de Monitoreo Atmosférico, SIMAT). The data contains temperature, relative humidity, atmospheric pressure, wind speed, and wind direction. We download daily rain data in Mexico from from the Global Surface Summary of the Day (GSOD) data provided by the US National Centers for Environmental Information (NCEI), which contains daily data on rain, minimum temperature, and maximum temperature, and for each station, the id number, latitude and longitude.</p>
+<p>[TODO: Add sample table like above]</p>
+</section>
+</section>
+<section id="summary-statistics-and-final-dataset-creation" class="level1">
+<h1>Summary Statistics and Final Dataset Creation</h1>
+<p>[Here instead write how we linked the data together and focus more on summary statistics, etc. ]</p>
+<p>We focus on the sample of hospitals in the greater Mexico City area (Mexico Valley), which is composed of 16 muncipalities in Mexico City with 9,209,944 peopole, 59 municipalities in the state of Mexico with 12,437,287 people, and 1 municipality in the state of Hidalgo with 168,302 people. https://es.wikipedia.org/wiki/Zona_metropolitana_del_valle_de_México</p>
+<p>We further restrict our sample to active establishments that are used for hospitalization purposes and omit psychiatric hospitals. Given changes in the reporting requirements starting in 2013, we only use data from that year onward.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

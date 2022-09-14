@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - about.qmd
+    - 01_data.qmd
+
+website:
+  title: "Air Pollution Exposure and Domestic Violence: Evidence From Mexico City"
+  navbar:
+    search: true
+    pinned: true
+    collapse: true
+    right:
+      - text: Home
+        href: about.qmd 
+      - icon: github
+        href: https://github.com/gsaabogado
+      - icon: twitter
+        href: https://twitter.com/gsaabogado
+      - text: Personal Site
+        href: https://luissarmiento.net/
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Sections"
+        contents:
+        - about.qmd
+        - 01_data.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
