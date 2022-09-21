@@ -7,6 +7,8 @@ author: "Ireri Hernandez and Luis Sarmiento"
 
 # Introduction
 
+dsaDAdsad
+
 This research report contains three primary sections to accompany my study on air quality alerts and school absences:
 
 1. ***Data Sets*** Includes a description of all the data files we use throughout the study. It is divided into five sub-sections
