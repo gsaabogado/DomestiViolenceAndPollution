@@ -1,0 +1,131 @@
+---
+title: "Regression Results"
+author: "Ireri Hernandez and Luis Sarmiento"
+format: 
+  html: 
+    toc: true
+    warning: false
+    code-fold: true
+    code-summary: "Show the Code"
+---
+
+## Regressions
+
+@tbl-AqiPoissonFEs Shows the results of estimating the effect of the AQI on the number of domestic violence patients in Mexico City. We estimate the results with Poisson pseudo maximum likelihood estimator panel models across five specifications; 1) controls for weather with a flexible quintile specification of temperature and precipitation alongside hospital, year, and month fixed effects. 2) increases the precision of our econometric design by including indicator variables for the day of the week and festivities. 3) Accounts for temporal unobservables changing across hospitals by adding hospital-by-year, hospital-by-month, and hospital-by-weekday fixed effects. Finally, 5) controls for unobservables varying with hospitals in the same month of the year with hospital-by-year-by-month fixed effects.
+
+```{r}
+#| label: tbl-AqiPoissonFEs
+#| tbl-cap: Effects of the AQI on hospitalizations related to family violence
+#| tbl-cap-location: top
+#| echo: true
+# Load the results 
+tab = read_rds("02_GenData/03_results/01_daily/PoissonFEs.rds")
+# Construct a data frame of fixed effects
+fe = rbind(Hospital = c(rep("Yes", 4)), 
+           Year = c(rep("Yes", 4)), 
+           Month = c(rep("Yes", 4)), 
+           `Weather Controls` = c(rep("Yes", 4)), 
+           Weekday = c("",rep("Yes", 3)), 
+           Festivity = c("",rep("Yes", 3)), 
+           `Hospital by Year FEs` = c(rep("", 2), rep("Yes", 2)), 
+           `Hospital by Month FEs` = c(rep("", 2), rep("Yes", 2)), 
+           `Hospital by Weekday FEs` = c(rep("", 2), rep("Yes", 2)), 
+           `Hospital by Year by Month FEs` = c(rep("", 3), rep("Yes", 1))) %>%
+  as.data.frame(.) %>% setNames(., c("(1)", "(2)", "(3)", "(4)"))
+# Construct the data frame with the results
+tab = rbind(tab, fe)
+# Create the table for the presentation
+kbl(tab, align = "c") %>%
+  kable_classic() %>% kable_styling(bootstrap_option = c("hover")) %>%
+  column_spec(c(5), italic = T) %>% 
+  pack_rows("Fitted-Statistics", 3, 5) %>% pack_rows("Controls", 6, 15) %>% 
+  footnote(general = "Effects of the AQI on hospitalizations related to family violence in Mexico City. Point estimates come from regressing the number of daily cases per hospital on the AQI with Poisson pseudo-maximum likelihood estimator pannel models. Cluster robsut standard errors allowing for two-way clustering over hospitals and months of the year in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", 
+           general_title = "Notes:", footnote_as_chunk = T)
+
+```
+
+## Robustness
+
+@tbl-PolPoissonFEs shows the results of our prefered specification across different air contaminants.
+
+```{r}
+#| label: tbl-PolPoissonFEs
+#| tbl-cap: Effects of the AQI on hospitalizations related to family violence across different air pollutants
+#| tbl-cap-location: top
+#| echo: true
+# Load the results 
+tab = read_rds("02_GenData/03_results/01_daily/PoissonFEsPol.rds")
+# Construct a data frame of fixed effects
+fe = rbind(`Weather Controls` = c(rep("Yes", 6)), 
+           `Hospital by Weekday FEs` = c(rep("Yes", 6)), 
+           `Hospital by Year by Month FEs` = c(rep("Yes", 6))) %>%  as.data.frame(.) %>% setNames(., names(tab))
+# Bind the estimates and fixed effects table
+tab = rbind(tab, fe)
+# Create the table for the presentation
+kbl(tab, align = "c") %>%
+  kable_classic() %>% kable_styling(bootstrap_option = c("hover")) %>%
+  column_spec(c(5), italic = T) %>% 
+  pack_rows("Fitted-Statistics", 3, 5) %>% pack_rows("Controls", 6, 8) %>% 
+  footnote(general = "Effects of the AQI on hospitalizations related to family violence in Mexico City. Point estimates come from regressing the number of daily cases per hospital on the standardized value of each contaminant with Poisson pseudo-maximum likelihood estimator panel models. All specifications flexible control for weather covariates alongside hospital-by-year-by-month, hospital-by-weekday, and festivity fixed effects. We standardize the value of each pollutant by subtracting its average and dividing by its standard deviation. Interpret point estimates as the effect of one standard deviation increase on hospitalizations. Cluster robust standard errors allowing for two-way clustering over hospitals and months of the year in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", 
+           general_title = "Notes:", footnote_as_chunk = T)
+
+```
+
+@fig-WeatherRobustness contains point estimates across five different specifications of weather controls. 1) has no weather controls, 2) includes temperature and precipitation, 3) add relative humidity, wind speed, and the interaction of humidity with temperature, 4) accounts non-linearly for weather differences by including the linear and quadratic terms of temperature and precipitation, 5) is the preferred specification controlling for temperature and precipitation with a flexible quintile specification.
+
+@fig-EstRobustness contains the results from our prefered specifications across different estimators. Particuluarly, we include results for Poisson, OLS, Log-OLS, and Negative Binomial estimators.
+
+::: panel-tabset
+## Weather Spec
+
+```{r}
+#| label: fig-WeatherRobustness
+#| fig-cap: Results across different weather specifications
+#| fig-cap-location: bottom
+#| echo: true
+# Load the results 
+est = read_rds("02_GenData/03_results/01_daily/AqiPoissonWeather.rds")
+# Ex
+plot = lapply(est, tidy) %>% rbindlist(., idcol = "spec") |> 
+  filter(term == "aqi")
+#
+ggplot(plot) +
+  geom_errorbar(aes(y = reorder(spec, -spec), xmax = estimate + `std.error`*1.645, 
+                    xmin = estimate-`std.error`*1.645), width = 0.1, color = "#141F52") +
+  geom_point(aes(y = reorder(spec, -spec), x = estimate), color = "#475ED1") + 
+  theme_economist() %+replace% 
+  theme(plot.caption = element_text(hjust = 0, vjust = -7, face = "italic", size = 9), 
+        axis.title.x = element_text(vjust = -2), plot.margin = unit(c(1,1,1,1),"cm")) +
+  geom_vline(aes(xintercept = 0), color = "red") +
+  labs(y = "", x = "Point estimate and 90% CIs", 
+       caption = str_wrap("Notes: Effects of the AQI on hospitalizations related to family violence in Mexico City. Point estimates come from regressing the number of daily cases per hospital on the AQI with Poisson pseudo-maximum likelihood estimator pannel models. We present results across five specifications of weather controls accounting for unobservables with hospital-by-year-by-month, hospital-by-weekday, and festivities fixed effects: 1) has no weather controls, 2) includes temperature and precipitation, 3) add relative humidity, wind speed, and the interaction of humidity with temperature, 4) accounts for weather differences quadratically by including the linear and quadratic terms of temperature and precipitation, 5) is the prefered specification controlling for temperature and precipitation with a flexible quintile specificaion. Cluster robsut standard errors allowing for two-way clustering over hospitals and months of the year in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", width = 100))
+
+```
+
+## Estimators
+
+```{r}
+#| label: fig-EstRobustness
+#| fig-cap: Results across different estimators
+#| fig-cap-location: bottom
+#| echo: true
+# Load the results 
+est = read_rds("02_GenData/03_results/01_daily/AqiPoissonEst.rds")
+# Ex
+plot = rbindlist(est, idcol = "spec") |> 
+  filter(term == "aqi")
+#
+ggplot(plot) +
+  geom_errorbar(aes(x = spec, ymax = estimate + `std.error`*1.645, 
+                    ymin = estimate-`std.error`*1.645), width = 0.1, color = "#141F52") +
+  geom_point(aes(x = spec, y = estimate), color = "#475ED1") + 
+  theme_economist() %+replace% 
+  theme(plot.caption = element_text(hjust = 0, vjust = -7, face = "italic", size = 9), 
+        axis.title.y = element_text(vjust = 4, angle = 90), 
+        plot.margin = unit(c(1,1,1,1),"cm")) +
+        scale_x_discrete(labels = function(x) str_wrap(x, width = 10)) +
+  labs(x = "", y = "Point estimate and 90% CIs", 
+       caption = str_wrap("Notes: Effects of the AQI on hospitalizations related to family violence in Mexico City. Point estimates come from regressing the number of daily cases per hospital on the AQI with Poisson pseudo-maximum likelihood estimator pannel models. We present results across five estimators accounting for weather with a flexible quintile specification of temperature and precipitation alongside hospital-by-year-by-month, hospital-by-weekday, and festivities fixed effects. Cluster robsut standard errors allowing for two-way clustering over hospitals and months of the year in parenthesis. Significance Codes: ***: 0.01, **: 0.05, *: 0.1", width = 100, indent = 5, exdent = 5))
+
+```
+:::
