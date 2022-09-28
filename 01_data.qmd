@@ -18,7 +18,15 @@ injuries = read_rds(paste0(wd, "/02_GenData/01_accidents/AccidentsRaw.rds"))
 
 ## Injuries
 
-We obtain administrative data on hospitalizations from Mexico's national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019. The raw data set contains all injuries and accidents reported by (public) all hospitals in Mexico between `r month(min(injuries$date), label = T)` `r year(min(injuries$date))` and `r month(max(injuries$date), label = T)` `r year(max(injuries$date))`. In total, the data set contains `r comma(nrow(injuries))` observations across `r comma(length(unique(injuries$Clues)))` hospitals. 
+We obtain administrative data on hospitalizations from Mexico's national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019.  
+
+We first keep only the variables of interest for our study, including injury id, hospital id, patient demographics, date and time of injury, other injury characteristics and information on the type of aggression. We then transform the date variable for all the files to a consistent date format YYYY-MM-DD, and further create a variable for the injury hour by parsing the hour component of the existing hour:minute variable. We finally bind all of the yearly files together 
+
+[Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]
+
+
+The cleaned data set contains all injuries and accidents reported by all (public) hospitals in Mexico between `r month(min(injuries$date), label = T)` `r year(min(injuries$date))` and `r month(max(injuries$date), label = T)` `r year(max(injuries$date))`. In total, the data set contains `r comma(nrow(injuries))` observations across `r comma(length(unique(injuries$Clues)))` hospitals. 
+
 
 [Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]
 
