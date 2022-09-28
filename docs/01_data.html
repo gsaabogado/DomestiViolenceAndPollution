@@ -194,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_data.html" class="sidebar-item-text sidebar-link active">Air Pollution and Domestic Violence</a>
+  <a href="./01_data.html" class="sidebar-item-text sidebar-link active">Description of Data Sources</a>
   </div>
 </li>
       </ul>
@@ -250,12 +250,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <details>
 <summary>Show the Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"web-page"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>injuries <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(wd, <span class="st">"/02_GenData/01_accidents/AccidentsRaw.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>injuries <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(wd,<span class="st">"/02_GenData/01_accidents/AccidentsRaw.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="injuries" class="level2">
 <h2 class="anchored" data-anchor-id="injuries">Injuries</h2>
-<p>We obtain administrative data on hospitalizations from Mexico’s national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019. The raw data set contains all injuries and accidents reported by (public) all hospitals in Mexico between Jan 1900 and Sep 9999. In total, the data set contains 6,095,753 observations across 0 hospitals.</p>
+<p>We obtain administrative data on hospitalizations from Mexico’s national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019.</p>
+<p>We first keep only the variables of interest for our study, including injury id, hospital id, patient demographics, date and time of injury, other injury characteristics and information on the type of aggression. We then transform the date variable for all the files to a consistent date format YYYY-MM-DD, and further create a variable for the injury hour by parsing the hour component of the existing hour:minute variable. We finally bind all of the yearly files together</p>
+<p>[Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]</p>
+<p>The cleaned data set contains all injuries and accidents reported by all (public) hospitals in Mexico between Jan 1900 and Sep 9999. In total, the data set contains 6,095,753 observations across 0 hospitals.</p>
 <p>[Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

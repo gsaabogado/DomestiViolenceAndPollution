@@ -13,7 +13,9 @@ format:
 
 ```{r}
 wd = gsub("web-page", "", getwd())
-injuries = read_rds(paste0(wd, "/02_GenData/01_accidents/AccidentsRaw.rds"))
+#injuries = read_rds(paste0(wd,"/02_GenData/01_accidents/AccidentsRaw.rds"))
+injuries = read_rds("02_GenData/01_accidents/AccidentsCdmx.rds")
+
 ```
 
 ## Injuries
