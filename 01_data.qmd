@@ -1,5 +1,5 @@
 ---
-title: "Air Pollution and Domestic Violence"
+title: "Description of Data Sources"
 author: "Ireri Hernandez and Luis Sarmiento"
 format: 
   html: 
@@ -12,24 +12,19 @@ format:
 # Data 
 
 ```{r}
-injuries = read_rds("02_GenData/01_accidents/AccidentsCdmx.rds")
+wd = gsub("web-page", "", getwd())
+injuries = read_rds(paste0(wd, "/02_GenData/01_accidents/AccidentsRaw.rds"))
 ```
 
 ## Injuries
 
-We obtain administrative data on hospitalizations from Mexico's national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019.  
-
-We first keep only the variables of interest for our study, including injury id, hospital id, patient demographics, date and time of injury, other injury characteristics and information on the type of aggression. We then transform the date variable for all the files to a consistent date format YYYY-MM-DD, and further create a variable for the injury hour by parsing the hour component of the existing hour:minute variable. We finally bind all of the yearly files together 
+We obtain administrative data on hospitalizations from Mexico's national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019. The raw data set contains all injuries and accidents reported by (public) all hospitals in Mexico between `r month(min(injuries$date), label = T)` `r year(min(injuries$date))` and `r month(max(injuries$date), label = T)` `r year(max(injuries$date))`. In total, the data set contains `r comma(nrow(injuries))` observations across `r comma(length(unique(injuries$Clues)))` hospitals. 
 
 [Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]
 
-The cleaned data set contains all injuries and accidents reported by all (public) hospitals in Mexico between `r month(min(injuries$date), label = T)` `r year(min(injuries$date))` and `r month(max(injuries$date), label = T)` `r year(max(injuries$date))`. In total, the data set contains `r comma(nrow(injuries))` observations across `r comma(length(unique(injuries$Clues)))` hospitals. 
-
-
-
 ![MX Hospitalization Registration Form. Note: find a better way to display this.](Formato_Lesiones_2021.pdf)
 
-The following set of tables contain the main variables we use in our analysis. First, @tbl-RawIdentifiers contains spatial case identifiers as the hospital id (CLUES) identification code alongside the state and county of the observation. @tbl-RawTimeStamp includes the date and time of the accident and the date and time of the hospitalization. Additionally, it includes an indicator variable when the accident occurred during a holiday.
+The following set of tables contain the main variables we use in our analysis. First, @tbl-RawIdentifiers contains spatial case identifiers as the hospital id (CLUES) identification code alongside the state and county of the observation. @tbl-RawTimeStamp includes the date and time of the accident and the date and time of the hospitalization. Additionally, it includes an indicator variable when the accident occurred during a holiday .
 
 Next
 
@@ -144,20 +139,4 @@ We focus on the sample of hospitals in the greater Mexico City area (Mexico Vall
 
 We further restrict our sample to active establishments that are used for hospitalization purposes and omit psychiatric hospitals. Given changes in the reporting requirements starting in 2013, we only use data from that year onward. 
 
-@fig-hosp shows the frequencey of accidents in hospitals []
 
-```{r Hospitals, echo=TRUE}
-#| label: fig-hosp
-#| fig-cap: Hospitalizations By Year.
-#| warning: false
- 
-data %>% 
-  mutate(year = year(date), label = TRUE)  %>% 
-  ggplot(aes(x = year)) +
-  scale_x_continuous(breaks = round(seq(2013, 2019, by = 1), 1)) +
-  geom_bar() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  facet_wrap(~hid,  scales = "free_y") + 
-  labs(title = "Frequency of Accidents in CDMX Hospitals by Year: 2013-2019")
-
-```
