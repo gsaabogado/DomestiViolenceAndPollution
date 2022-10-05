@@ -1,5 +1,5 @@
 ---
-title: "Description of Data Sources"
+title: "Air Pollution and Domestic Violence"
 author: "Ireri Hernandez and Luis Sarmiento"
 format: 
   html: 
@@ -13,28 +13,29 @@ format:
 
 ```{r}
 wd = gsub("web-page", "", getwd())
-#injuries = read_rds(paste0(wd,"/02_GenData/01_accidents/AccidentsRaw.rds"))
-injuries = read_rds("02_GenData/01_accidents/AccidentsCdmx.rds")
-
+injuries = read_rds(paste0(wd,"02_GenData/01_accidents/AccidentsCdmx.rds"))
 ```
 
 ## Injuries
 
-We obtain administrative data on hospitalizations from Mexico's national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019.  
+We obtain administrative data on hospitalizations from Mexico's national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the the patients report the accident occurred, classified as: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019.  
 
-We first keep only the variables of interest for our study, including injury id, hospital id, patient demographics, date and time of injury, other injury characteristics and information on the type of aggression. We then transform the date variable for all the files to a consistent date format YYYY-MM-DD, and further create a variable for the injury hour by parsing the hour component of the existing hour:minute variable. We finally bind all of the yearly files together 
+We first keep only the variables of interest for our study, including injury id, hospital id, patient demographics, date and time of injury, other injury characteristics and information on the type of aggression. We then transform the date variable for all the files to a consistent date format YYYY-MM-DD, and further create a variable for the injury hour by parsing the hour component of the existing hour:minute variable. We finally bind all of the yearly files together. 
 
-[Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]
+We make some restrictions to our sample. First, we only keep hospitalizations starting from 2013 up to 2019. There were some reporting changes in 2013, [specify here] which creates inconsistencies in the way hospitals report cases. Furthermore, we keep only hospitalizations that happened within the Mexico Valley by restricting the cases that were reported only to our municipaliteis of interest which includes 16 municipalities of Mexico city, 59 municipalites in the Valley of Mexico, and 1 municipality in the state of Hidalgo.
+
+Finally, we keep only hospitalization units, remove cases from hospitals that are psychiatric units, and keep only hospitals that are functioning during the observation period. 
+
+## Hospital Controls
+We obtain hospital characteristics from the Mexican health ministry registry of health establishments, which contains for each hospital a unique health establishment code (CLUES) alongside other hospital characteristics such as location, type of establishment (e.g. hospitalization, social support, external consultation), total number of beds and doctors offices, functioning status, longitude and latitude. This allows us to match hospitals to their information such as longitude and latitude, which we later use to match to pollution monitors.
 
 
 The cleaned data set contains all injuries and accidents reported by all (public) hospitals in Mexico between `r month(min(injuries$date), label = T)` `r year(min(injuries$date))` and `r month(max(injuries$date), label = T)` `r year(max(injuries$date))`. In total, the data set contains `r comma(nrow(injuries))` observations across `r comma(length(unique(injuries$Clues)))` hospitals. 
 
 
-[Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]
-
 ![MX Hospitalization Registration Form. Note: find a better way to display this.](Formato_Lesiones_2021.pdf)
 
-The following set of tables contain the main variables we use in our analysis. First, @tbl-RawIdentifiers contains spatial case identifiers as the hospital id (CLUES) identification code alongside the state and county of the observation. @tbl-RawTimeStamp includes the date and time of the accident and the date and time of the hospitalization. Additionally, it includes an indicator variable when the accident occurred during a holiday .
+The following set of tables contain the main variables we use in our analysis. First, @tbl-RawIdentifiers contains spatial case identifiers as the hospital id (CLUES) identification code alongside the state and county of the observation. @tbl-RawTimeStamp includes the date and time of the accident and the date and time of the hospitalization. Additionally, it includes an indicator variable when the accident occurred during a holiday.
 
 Next
 
@@ -126,21 +127,67 @@ kbl(select(injuries, id, Nassailants:AssailantRelation) %>%  head(.)) %>%
 :::
 
 
-## Hospital Controls
-We obtain hospital characteristics from the Mexican health ministry registry of health establishments, which contains for each hospital a unique health establishment code (CLUES) alongside other hospital characteristics such as location, type of establishment (e.g. hospitalization, social support, external consultation), total number of beds and doctors offices, operating status, longitude and latitude. 
-
-[TODO: Add sample table like above]
-
 ## Air Pollution
-Air pollution data comes from the center for atmospheric information of Mexico City (Direccion de Monitoreo Armosferico de la Ciudad de Mexico) and contains hourly observations of the primary criteria pollutants: carbon monoxide (CO), coarse particulate matter (PM10), fine particulate matter (PM25), nitrogen dioxide (NO2), ozone (O3), and sulfur dioxide (SO2). The data contains for each station, the station code, latitude and longitude, and the date and hour when the reading was collected. 
+Air pollution data comes from the center for atmospheric information of Mexico City (Dirección de Monitoreo Atmosférico de la Ciudad de México) and contains hourly observations of the primary criteria pollutants: carbon monoxide (CO), coarse particulate matter (PM10), fine particulate matter (PM25), nitrogen dioxide (NO2), ozone (O3), and sulfur dioxide (SO2). The data contains for each station, the station code and the date and hour when the reading was collected. We merge the pollution data by station code with a dataset that contains the station's latitude and longitude. 
+
+We first create a separate date and hour variable based on the existing date and time joint variable. We transform the 24 hour variable to 0 and remove stations for which we do not have coordinate data. 
 
 [TODO: Add sample table like above, and talk about the construction of AQI,and imputations, etc]
 
 ## Weather
 
-The weather data comes from 34 weather stations from the atmospheric monitoring system of Mexico City (Sistema de Monitoreo Atmosférico, SIMAT). The data contains temperature, relative humidity, atmospheric pressure, wind speed, and wind direction. We download daily rain data in Mexico from from the Global Surface Summary of the Day (GSOD) data provided by the US National Centers for Environmental Information (NCEI), which contains daily data on rain, minimum temperature, and maximum temperature, and for each station, the id number, latitude and longitude.  
+The weather data comes from 34 weather stations from the atmospheric monitoring system of Mexico City (Sistema de Monitoreo Atmosférico, SIMAT). The data contains the name of each weather station, a variable with the date and time of the measurement, and measures of temperature, relative humidity, atmospheric pressure, wind speed, and wind direction. We transform the 24 hour variable to 0.   
 
-[TODO: Add sample table like above]
+Additionally, we download daily rain data from Mexico from from the Global Surface Summary of the Day (GSOD) data provided by the US National Centers for Environmental Information (NCEI), which contains daily data on rain, minimum temperature, and maximum temperature, and for each station, the id number, latitude and longitude. 
+
+We use a shapefile of Mexico restricted to include only the municipalities in our Valley of Mexico sample, based on our list of municipality codes. We then restrict the rain data to include only the observations that are located within the boundaries of this restricted shapefile. 
+
+
+# Wind Instrument 
+
+We build an instrument for air pollution based on our measures of wind speed and wind direction included in the weather data. The hourly wind direction data is in angle degrees, ranging from 0 to 360, while the hourly wind speed ranges from 0 to 14.6 (what are the units?). We first create daily measures of wind speed and wind direction by taking the average daily values. 
+
+In order to correctly compute an average wind direction value, we take some steps and use of trigonometric functions that have been suggested by Grange (2014). Particularly, we use the scalar average wind speed and the resultant vector average wind direction. We do this by calculating two wind vector components, u and v, representing the east-west and north-south directions, respectively. These components are calculated by first converting the wind direction degrees to radians.  These components are calculated along with wind speed by weighting the components by the negative of wind speed magnitude,in order to take into have a measure of where the flow is heading to instead of where the wind is blowing from. [note: did we use this negative sign in our formula?
+
+[Check this section with Luis...]
+
+
+# Computing the daily AQI 
+
+
+We compute inverse distance-weighted values of pollution and weather variables in order to interpolate (for issing values?) To do so we first extract the stations' geo-coordinates and compute the distance between all measuring stations. We restrict our interpolation to use only stations that are within 50 kilometers of each other. We then compute an inverse distance-weighted value for each station, hour, and pollution and weather variable using the following formula:
+
+$$
+
+\frac{\sum_{n=1}^{n} v_i\frac{1}{d_i^2}}{\sum_{n=1}^{n} \frac{1}{d_i^2}} = \widehat{idw} 
+
+$$
+
+We also compute a standard Air Quality Index (AQI) measure. 
+We take the following steps to prepare the pollution data: First we transform our ozone variable into particles per million. Then we create the eight hour ozone rolling average [Expand on this?]. We further bound PM10 and PM25 to five hundred units in order to avoid extremes by setting values greater than 500 to 500. The AQI is defined as the daily maximum of CO, NO2, PM25, PM10, O3, SO2. If the AQI is an infinite number, we set it as missing. 
+
+
+Furthermore, we add the wind direction of the closest station. 
+
+[TODO: Add sample table]
+
+Finally in order to create final air pollutoin dataset, we merge the normal, IDW, and Normal AQI data sets. 
+
+#Create the final data set for the regressions
+
+#Clarify level of aggregation
+
+ Assign weighted pollution, precipitation, and wind instrument values to the hospitals
+ Compute the distance between stations and hospitals 
+ Add the station ID
+ Only select the five closest stations to each hospital
+ Calculate the IDW for each weather variable
+ Merge all the pollution weighted values for each hospital
+ Include the wind direction of the closest station
+ join the wind direction, wind instrument, and rain to the weather variables
+
+#### Aggregate the accidents data to total daily accidents per hospital ####
+Aggregate the accidents to hourly total accidents per  hospital by type
 
 # Summary Statistics and Final Dataset Creation 
 [Here instead write how we linked the data together and focus more on summary statistics, etc. ]
@@ -149,4 +196,20 @@ We focus on the sample of hospitals in the greater Mexico City area (Mexico Vall
 
 We further restrict our sample to active establishments that are used for hospitalization purposes and omit psychiatric hospitals. Given changes in the reporting requirements starting in 2013, we only use data from that year onward. 
 
+@fig-hosp shows the frequency of accidents in hospitals []
 
+```{r Hospitals, echo=TRUE}
+#| label: fig-hosp
+#| fig-cap: Hospitalizations By Year.
+#| warning: false
+ 
+# data %>% 
+#   mutate(year = lubridate::year(date), label = TRUE)  %>% 
+#   ggplot(aes(x = year)) +
+#   scale_x_continuous(breaks = round(seq(2013, 2019, by = 1), 1)) +
+#   geom_bar() +
+#   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+#   facet_wrap(~hid,  scales = "free_y") + 
+#   labs(title = "Frequency of Accidents in CDMX Hospitals by Year: 2013-2019")
+
+```

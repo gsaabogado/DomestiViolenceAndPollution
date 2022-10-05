@@ -8,7 +8,7 @@
 
 <meta name="author" content="Ireri Hernandez and Luis Sarmiento">
 
-<title>Air Pollution Exposure and Domestic Violence: Evidence From Mexico City - Description of Data Sources</title>
+<title>Air Pollution Exposure and Domestic Violence: Evidence From Mexico City - Air Pollution and Domestic Violence</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Description of Data Sources</h1>
+      <h1 class="quarto-secondary-nav-title">Air Pollution and Domestic Violence</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -194,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_data.html" class="sidebar-item-text sidebar-link active">Description of Data Sources</a>
+  <a href="./01_data.html" class="sidebar-item-text sidebar-link active">Air Pollution and Domestic Violence</a>
   </div>
 </li>
       </ul>
@@ -215,6 +215,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#air-pollution" id="toc-air-pollution" class="nav-link" data-scroll-target="#air-pollution">Air Pollution</a></li>
   <li><a href="#weather" id="toc-weather" class="nav-link" data-scroll-target="#weather">Weather</a></li>
   </ul></li>
+  <li><a href="#wind-instrument" id="toc-wind-instrument" class="nav-link" data-scroll-target="#wind-instrument">Wind Instrument</a></li>
+  <li><a href="#computing-the-daily-aqi" id="toc-computing-the-daily-aqi" class="nav-link" data-scroll-target="#computing-the-daily-aqi">Computing the daily AQI</a></li>
   <li><a href="#summary-statistics-and-final-dataset-creation" id="toc-summary-statistics-and-final-dataset-creation" class="nav-link" data-scroll-target="#summary-statistics-and-final-dataset-creation">Summary Statistics and Final Dataset Creation</a></li>
   </ul>
 </nav>
@@ -224,7 +226,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Description of Data Sources</h1>
+<h1 class="title d-none d-lg-block">Air Pollution and Domestic Violence</h1>
 </div>
 
 
@@ -250,23 +252,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <details>
 <summary>Show the Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">"web-page"</span>, <span class="st">""</span>, <span class="fu">getwd</span>())</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>injuries <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(wd,<span class="st">"/02_GenData/01_accidents/AccidentsRaw.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>injuries <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="fu">paste0</span>(wd,<span class="st">"02_GenData/01_accidents/AccidentsCdmx.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="injuries" class="level2">
 <h2 class="anchored" data-anchor-id="injuries">Injuries</h2>
-<p>We obtain administrative data on hospitalizations from Mexico’s national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the accident occurred, including: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019.</p>
-<p>We first keep only the variables of interest for our study, including injury id, hospital id, patient demographics, date and time of injury, other injury characteristics and information on the type of aggression. We then transform the date variable for all the files to a consistent date format YYYY-MM-DD, and further create a variable for the injury hour by parsing the hour component of the existing hour:minute variable. We finally bind all of the yearly files together</p>
-<p>[Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]</p>
-<p>The cleaned data set contains all injuries and accidents reported by all (public) hospitals in Mexico between Jan 1900 and Sep 9999. In total, the data set contains 6,095,753 observations across 0 hospitals.</p>
-<p>[Here describe the focus of dates and cleaning, cleaning of errors on dates, area of focus]</p>
+<p>We obtain administrative data on hospitalizations from Mexico’s national health ministry through the health information general directorate (SS/DGIS, SINAC 2021; http://www.dgis.salud.gob.mx/contenidos/basesdedatos/Datos_Abiertos_gobmx.html), which has case-level data on all injury-related hospital admissions. This data includes the exact date, time and locality of the injury in addition to type of injury and demographic patient data such as age, gender and education. Furthermore, the data includes the type of place where the the patients report the accident occurred, classified as: home/dwelling, institutional residence, school, sports area, public road (pedestrian), commerce and service area, work, farm, club/bar, public vehicle, private vehicle, or other. We download, clean, and combine the data from 2010-2014 (reported together in one file), and the yearly files of 2015-2019.</p>
+<p>We first keep only the variables of interest for our study, including injury id, hospital id, patient demographics, date and time of injury, other injury characteristics and information on the type of aggression. We then transform the date variable for all the files to a consistent date format YYYY-MM-DD, and further create a variable for the injury hour by parsing the hour component of the existing hour:minute variable. We finally bind all of the yearly files together.</p>
+<p>We make some restrictions to our sample. First, we only keep hospitalizations starting from 2013 up to 2019. There were some reporting changes in 2013, [specify here] which creates inconsistencies in the way hospitals report cases. Furthermore, we keep only hospitalizations that happened within the Mexico Valley by restricting the cases that were reported only to our municipaliteis of interest which includes 16 municipalities of Mexico city, 59 municipalites in the Valley of Mexico, and 1 municipality in the state of Hidalgo.</p>
+<p>Finally, we keep only hospitalization units, remove cases from hospitals that are psychiatric units, and keep only hospitals that are functioning during the observation period.</p>
+</section>
+<section id="hospital-controls" class="level2">
+<h2 class="anchored" data-anchor-id="hospital-controls">Hospital Controls</h2>
+<p>We obtain hospital characteristics from the Mexican health ministry registry of health establishments, which contains for each hospital a unique health establishment code (CLUES) alongside other hospital characteristics such as location, type of establishment (e.g.&nbsp;hospitalization, social support, external consultation), total number of beds and doctors offices, functioning status, longitude and latitude. This allows us to match hospitals to their information such as longitude and latitude, which we later use to match to pollution monitors.</p>
+<p>The cleaned data set contains all injuries and accidents reported by all (public) hospitals in Mexico between Jan 2010 and Dec 2019. In total, the data set contains 591,181 observations across 67 hospitals.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="Formato_Lesiones_2021.pdf" class="img-fluid"></p>
 <p></p><figcaption class="figure-caption">MX Hospitalization Registration Form. Note: find a better way to display this.</figcaption><p></p>
 </figure>
 </div>
-<p>The following set of tables contain the main variables we use in our analysis. First, <a href="#tbl-RawIdentifiers">Table&nbsp;1</a> contains spatial case identifiers as the hospital id (CLUES) identification code alongside the state and county of the observation. <a href="#tbl-RawTimeStamp">Table&nbsp;2</a> includes the date and time of the accident and the date and time of the hospitalization. Additionally, it includes an indicator variable when the accident occurred during a holiday .</p>
+<p>The following set of tables contain the main variables we use in our analysis. First, <a href="#tbl-RawIdentifiers">Table&nbsp;1</a> contains spatial case identifiers as the hospital id (CLUES) identification code alongside the state and county of the observation. <a href="#tbl-RawTimeStamp">Table&nbsp;2</a> includes the date and time of the accident and the date and time of the hospitalization. Additionally, it includes an indicator variable when the accident occurred during a holiday.</p>
 <p>Next</p>
 <div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Identifiers</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Time Stamps</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Demographics</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Accident Characteristics</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Assailant</a></li></ul>
@@ -289,47 +295,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <thead>
   <tr>
    <th style="text-align:left;"> id </th>
-   <th style="text-align:left;"> hid </th>
+   <th style="text-align:left;"> Clues </th>
    <th style="text-align:right;"> state </th>
    <th style="text-align:right;"> county </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
-   <td style="text-align:left;"> MNSSA000030 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021043 </td>
+   <td style="text-align:left;"> MCSSA002435 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 91 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
-   <td style="text-align:left;"> MNSSA000030 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021044 </td>
+   <td style="text-align:left;"> MCSSA002435 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 35 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
-   <td style="text-align:left;"> MNSSA000030 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021045 </td>
+   <td style="text-align:left;"> MCSSA002435 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 35 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
-   <td style="text-align:left;"> MNSSA000030 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021046 </td>
+   <td style="text-align:left;"> MCSSA002435 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 35 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
-   <td style="text-align:left;"> MNSSA000030 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021047 </td>
+   <td style="text-align:left;"> MCSSA002435 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 23 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
-   <td style="text-align:left;"> MNSSA000030 </td>
-   <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021048 </td>
+   <td style="text-align:left;"> MCSSA002435 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 35 </td>
   </tr>
 </tbody>
 <tfoot><tr><td style="padding: 0; " colspan="100%">
@@ -367,51 +373,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
-   <td style="text-align:left;"> 2010-05-19 </td>
-   <td style="text-align:left;"> 12:30 </td>
-   <td style="text-align:left;"> 2010-05-19 </td>
-   <td style="text-align:left;"> 12:30 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021043 </td>
+   <td style="text-align:left;"> 2014-08-10 </td>
+   <td style="text-align:left;"> 16:40 </td>
+   <td style="text-align:left;"> 2014-08-10 </td>
+   <td style="text-align:left;"> 18:40 </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
-   <td style="text-align:left;"> 2010-04-28 </td>
-   <td style="text-align:left;"> 14:00 </td>
-   <td style="text-align:left;"> 2010-04-28 </td>
-   <td style="text-align:left;"> 14:15 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021044 </td>
+   <td style="text-align:left;"> 2014-08-10 </td>
+   <td style="text-align:left;"> 01:00 </td>
+   <td style="text-align:left;"> 2014-08-10 </td>
+   <td style="text-align:left;"> 05:50 </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
-   <td style="text-align:left;"> 2010-04-28 </td>
-   <td style="text-align:left;"> 14:00 </td>
-   <td style="text-align:left;"> 2010-04-28 </td>
-   <td style="text-align:left;"> 14:15 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021045 </td>
+   <td style="text-align:left;"> 2014-08-10 </td>
+   <td style="text-align:left;"> 16:45 </td>
+   <td style="text-align:left;"> 2014-08-10 </td>
+   <td style="text-align:left;"> 17:00 </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
-   <td style="text-align:left;"> 2011-06-25 </td>
-   <td style="text-align:left;"> 20:40 </td>
-   <td style="text-align:left;"> 2011-06-25 </td>
-   <td style="text-align:left;"> 20:50 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021046 </td>
+   <td style="text-align:left;"> 2014-08-11 </td>
+   <td style="text-align:left;"> 00:30 </td>
+   <td style="text-align:left;"> 2014-08-11 </td>
+   <td style="text-align:left;"> 00:50 </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
-   <td style="text-align:left;"> 2011-06-01 </td>
-   <td style="text-align:left;"> 11:50 </td>
-   <td style="text-align:left;"> 2011-06-01 </td>
-   <td style="text-align:left;"> 12:05 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021047 </td>
+   <td style="text-align:left;"> 2014-05-02 </td>
+   <td style="text-align:left;"> 15:00 </td>
+   <td style="text-align:left;"> 2014-08-12 </td>
+   <td style="text-align:left;"> 16:00 </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
-   <td style="text-align:left;"> 2011-06-26 </td>
-   <td style="text-align:left;"> 12:00 </td>
-   <td style="text-align:left;"> 2011-06-26 </td>
-   <td style="text-align:left;"> 18:30 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021048 </td>
+   <td style="text-align:left;"> 2014-06-06 </td>
+   <td style="text-align:left;"> 09:00 </td>
+   <td style="text-align:left;"> 2014-08-12 </td>
+   <td style="text-align:left;"> 15:00 </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
 </tbody>
@@ -452,46 +458,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
-   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021043 </td>
+   <td style="text-align:right;"> 21 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
-   <td style="text-align:right;"> 44 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021044 </td>
    <td style="text-align:right;"> 15 </td>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
-   <td style="text-align:right;"> 31 </td>
-   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021045 </td>
+   <td style="text-align:right;"> 22 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021046 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 6 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
-   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021047 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021048 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
   </tr>
 </tbody>
 <tfoot><tr><td style="padding: 0; " colspan="100%">
@@ -528,46 +534,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
-   <td style="text-align:right;"> 66 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021043 </td>
+   <td style="text-align:right;"> 21 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
-   <td style="text-align:right;"> 44 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021044 </td>
    <td style="text-align:right;"> 15 </td>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
-   <td style="text-align:right;"> 31 </td>
-   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021045 </td>
+   <td style="text-align:right;"> 22 </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021046 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 6 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
-   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021047 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021048 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
   </tr>
 </tbody>
 <tfoot><tr><td style="padding: 0; " colspan="100%">
@@ -608,64 +614,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
-   <td style="text-align:left;"> T630 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021043 </td>
+   <td style="text-align:left;"> S609 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 3 </td>
    <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 5 </td>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 3 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
-   <td style="text-align:left;"> S518 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021044 </td>
+   <td style="text-align:left;"> S913 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021045 </td>
+   <td style="text-align:left;"> S818 </td>
+   <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 13 </td>
    <td style="text-align:right;"> 14 </td>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 3 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
-   <td style="text-align:left;"> S202 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021046 </td>
+   <td style="text-align:left;"> S018 </td>
+   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 14 </td>
    <td style="text-align:right;"> 2 </td>
    <td style="text-align:right;"> 3 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
-   <td style="text-align:left;"> T044 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021047 </td>
+   <td style="text-align:left;"> T743 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 25 </td>
    <td style="text-align:right;"> 16 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 3 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
-   <td style="text-align:left;"> S807 </td>
-   <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 20 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 5 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 4 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
-   <td style="text-align:left;"> S422 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021048 </td>
+   <td style="text-align:left;"> T743 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 20 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
   </tr>
 </tbody>
 <tfoot><tr><td style="padding: 0; " colspan="100%">
@@ -702,46 +708,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210436 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210437 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210438 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> 15 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021043 </td>
    <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> 999 </td>
+   <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 8 </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210439 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> 37 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210440 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021044 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 1210441 </td>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021045 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021046 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> 30 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021047 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> 36 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 2021048 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> 38 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
   </tr>
 </tbody>
 <tfoot><tr><td style="padding: 0; " colspan="100%">
@@ -755,20 +761,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="hospital-controls" class="level2">
-<h2 class="anchored" data-anchor-id="hospital-controls">Hospital Controls</h2>
-<p>We obtain hospital characteristics from the Mexican health ministry registry of health establishments, which contains for each hospital a unique health establishment code (CLUES) alongside other hospital characteristics such as location, type of establishment (e.g.&nbsp;hospitalization, social support, external consultation), total number of beds and doctors offices, operating status, longitude and latitude.</p>
-<p>[TODO: Add sample table like above]</p>
-</section>
 <section id="air-pollution" class="level2">
 <h2 class="anchored" data-anchor-id="air-pollution">Air Pollution</h2>
-<p>Air pollution data comes from the center for atmospheric information of Mexico City (Direccion de Monitoreo Armosferico de la Ciudad de Mexico) and contains hourly observations of the primary criteria pollutants: carbon monoxide (CO), coarse particulate matter (PM10), fine particulate matter (PM25), nitrogen dioxide (NO2), ozone (O3), and sulfur dioxide (SO2). The data contains for each station, the station code, latitude and longitude, and the date and hour when the reading was collected.</p>
+<p>Air pollution data comes from the center for atmospheric information of Mexico City (Dirección de Monitoreo Atmosférico de la Ciudad de México) and contains hourly observations of the primary criteria pollutants: carbon monoxide (CO), coarse particulate matter (PM10), fine particulate matter (PM25), nitrogen dioxide (NO2), ozone (O3), and sulfur dioxide (SO2). The data contains for each station, the station code and the date and hour when the reading was collected. We merge the pollution data by station code with a dataset that contains the station’s latitude and longitude.</p>
+<p>We first create a separate date and hour variable based on the existing date and time joint variable. We transform the 24 hour variable to 0 and remove stations for which we do not have coordinate data.</p>
 <p>[TODO: Add sample table like above, and talk about the construction of AQI,and imputations, etc]</p>
 </section>
 <section id="weather" class="level2">
 <h2 class="anchored" data-anchor-id="weather">Weather</h2>
-<p>The weather data comes from 34 weather stations from the atmospheric monitoring system of Mexico City (Sistema de Monitoreo Atmosférico, SIMAT). The data contains temperature, relative humidity, atmospheric pressure, wind speed, and wind direction. We download daily rain data in Mexico from from the Global Surface Summary of the Day (GSOD) data provided by the US National Centers for Environmental Information (NCEI), which contains daily data on rain, minimum temperature, and maximum temperature, and for each station, the id number, latitude and longitude.</p>
-<p>[TODO: Add sample table like above]</p>
+<p>The weather data comes from 34 weather stations from the atmospheric monitoring system of Mexico City (Sistema de Monitoreo Atmosférico, SIMAT). The data contains the name of each weather station, a variable with the date and time of the measurement, and measures of temperature, relative humidity, atmospheric pressure, wind speed, and wind direction. We transform the 24 hour variable to 0.</p>
+<p>Additionally, we download daily rain data from Mexico from from the Global Surface Summary of the Day (GSOD) data provided by the US National Centers for Environmental Information (NCEI), which contains daily data on rain, minimum temperature, and maximum temperature, and for each station, the id number, latitude and longitude.</p>
+<p>We use a shapefile of Mexico restricted to include only the municipalities in our Valley of Mexico sample, based on our list of municipality codes. We then restrict the rain data to include only the observations that are located within the boundaries of this restricted shapefile.</p>
+</section>
+</section>
+<section id="wind-instrument" class="level1">
+<h1>Wind Instrument</h1>
+<p>We build an instrument for air pollution based on our measures of wind speed and wind direction included in the weather data. The hourly wind direction data is in angle degrees, ranging from 0 to 360, while the hourly wind speed ranges from 0 to 14.6 (what are the units?). We first create daily measures of wind speed and wind direction by taking the average daily values.</p>
+<p>In order to correctly compute an average wind direction value, we take some steps and use of trigonometric functions that have been suggested by Grange (2014). Particularly, we use the scalar average wind speed and the resultant vector average wind direction. We do this by calculating two wind vector components, u and v, representing the east-west and north-south directions, respectively. These components are calculated by first converting the wind direction degrees to radians. These components are calculated along with wind speed by weighting the components by the negative of wind speed magnitude,in order to take into have a measure of where the flow is heading to instead of where the wind is blowing from. [note: did we use this negative sign in our formula?</p>
+<p>[Check this section with Luis…]</p>
+</section>
+<section id="computing-the-daily-aqi" class="level1">
+<h1>Computing the daily AQI</h1>
+<p>We compute inverse distance-weighted values of pollution and weather variables in order to interpolate (for issing values?) To do so we first extract the stations’ geo-coordinates and compute the distance between all measuring stations. We restrict our interpolation to use only stations that are within 50 kilometers of each other. We then compute an inverse distance-weighted value for each station, hour, and pollution and weather variable using the following formula:</p>
+<p>$$</p>
+<p> = </p>
+<p>$$</p>
+<p>We also compute a standard Air Quality Index (AQI) measure. We take the following steps to prepare the pollution data: First we transform our ozone variable into particles per million. Then we create the eight hour ozone rolling average [Expand on this?]. We further bound PM10 and PM25 to five hundred units in order to avoid extremes by setting values greater than 500 to 500. The AQI is defined as the daily maximum of CO, NO2, PM25, PM10, O3, SO2. If the AQI is an infinite number, we set it as missing.</p>
+<p>Furthermore, we add the wind direction of the closest station.</p>
+<p>[TODO: Add sample table]</p>
+<p>Finally in order to create final air pollutoin dataset, we merge the normal, IDW, and Normal AQI data sets.</p>
+<p>#Create the final data set for the regressions</p>
+<p>#Clarify level of aggregation</p>
+<p>Assign weighted pollution, precipitation, and wind instrument values to the hospitals Compute the distance between stations and hospitals Add the station ID Only select the five closest stations to each hospital Calculate the IDW for each weather variable Merge all the pollution weighted values for each hospital Include the wind direction of the closest station join the wind direction, wind instrument, and rain to the weather variables</p>
+<section id="aggregate-the-accidents-data-to-total-daily-accidents-per-hospital" class="level4">
+<h4 class="anchored" data-anchor-id="aggregate-the-accidents-data-to-total-daily-accidents-per-hospital">Aggregate the accidents data to total daily accidents per hospital</h4>
+<p>Aggregate the accidents to hourly total accidents per hospital by type</p>
 </section>
 </section>
 <section id="summary-statistics-and-final-dataset-creation" class="level1">
@@ -776,6 +803,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>[Here instead write how we linked the data together and focus more on summary statistics, etc. ]</p>
 <p>We focus on the sample of hospitals in the greater Mexico City area (Mexico Valley), which is composed of 16 muncipalities in Mexico City with 9,209,944 peopole, 59 municipalities in the state of Mexico with 12,437,287 people, and 1 municipality in the state of Hidalgo with 168,302 people. https://es.wikipedia.org/wiki/Zona_metropolitana_del_valle_de_México</p>
 <p>We further restrict our sample to active establishments that are used for hospitalization purposes and omit psychiatric hospitals. Given changes in the reporting requirements starting in 2013, we only use data from that year onward.</p>
+<p><strong>?@fig-hosp</strong> shows the frequency of accidents in hospitals []</p>
+<div class="cell">
+<details>
+<summary>Show the Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data %&gt;% </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(year = lubridate::year(date), label = TRUE)  %&gt;% </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggplot(aes(x = year)) +</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_x_continuous(breaks = round(seq(2013, 2019, by = 1), 1)) +</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_bar() +</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   facet_wrap(~hid,  scales = "free_y") + </span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   labs(title = "Frequency of Accidents in CDMX Hospitals by Year: 2013-2019")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
 </section>

@@ -4,6 +4,7 @@ project:
   render:
     - about.qmd
     - 01_data.qmd
+    - 02_descriptives.qmd
 
 website:
   title: "Air Pollution Exposure and Domestic Violence: Evidence From Mexico City"
@@ -28,6 +29,7 @@ website:
         contents:
         - about.qmd
         - 01_data.qmd
+        - 02_descriptives.qmd
 
 format:
   html:
