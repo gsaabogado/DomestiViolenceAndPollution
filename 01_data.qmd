@@ -190,7 +190,7 @@ Finally in order to create final air pollutoin dataset, we merge the normal, IDW
 Aggregate the accidents to hourly total accidents per  hospital by type
 
 # Summary Statistics and Final Dataset Creation 
-[Here instead write how we linked the data together and focus more on summary statistics, etc. ]
+[ and focus more on summary statistics, etc. ]
 
 We focus on the sample of hospitals in the greater Mexico City area (Mexico Valley), which is composed of 16 muncipalities in Mexico City with 9,209,944 peopole, 59 municipalities in the state of Mexico with 12,437,287 people, and 1 municipality in the state of Hidalgo with 168,302 people. https://es.wikipedia.org/wiki/Zona_metropolitana_del_valle_de_México 
 
