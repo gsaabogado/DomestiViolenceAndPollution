@@ -171,23 +171,16 @@ $$
 
 To create the AQI measure, we transform our ozone variable into particles per million and create an eight hour ozone rolling average. We further bound PM10 and PM25 to 500 units in order to avoid extremes. The AQI is defined as the daily maximum of CO, NO2, PM25, PM10, O3, SO2 and calculated according to the U.S. Environmental Protection Agency (EPA) documentation https://www.airnow.gov/sites/default/files/2020-05/aqi-technical-assistance-document-sept2018.pdf. The AQI index variable is categorized as good (0-50), moderate (51-100), unhealthy for sensitive groups (101-150), unhealthy (151-200), very unhealthy (201-300), and hazardous (301-500).
 
-#Clarify level of aggregation
-[Check with Luis: currently we're taking the max of hourly pollutants for each pollutant, then max of this max for a given day]
-
 Finally, in order to create final air pollution dataset, we merge the pollution data with the inverse-distance weighted values and the daily AQI datasets together. Furthermore, we add the wind direction of the closest station. 
 
 [TODO: Add sample table]
 
 #Create the final data set for the regressions
 
-In order to create our final dataset, we assign weighted pollution, precipitation, and wind instrument values to the hospitals based on the longitude and latitude. We first compute the distance between stations and hospitals and only select the five closest weather and pollution stations to each hospital. We then calculate the IDW value for each weather variable and merge all the pollution weighted values for each hospital. We further include the wind direction of the closest station and add the wind direction values, wind instrument, and rain and  weather variables.
+In order to create our final dataset, we assign weighted pollution, precipitation, and wind instrument values to the hospitals based on the longitude and latitude. We compute the distance between stations and hospitals and only select the five closest weather and pollution stations to each hospital. We then calculate the IDW value for each weather variable and merge all the pollution-weighted values for each hospital. We further include the wind direction of the closest station and add the wind direction values, wind instrument, and rain and  weather variables.
 
-#### Aggregate the accidents data to total daily accidents per hospital ####
-Aggregate the accidents to hourly total accidents per  hospital by type
-
-# Summary Statistics and Final Dataset Creation 
-[ and focus more on summary statistics, etc. ]
-
+# Aggregating accidents to total daily accidents per hospital ####
+We aggregate accidents to daily hospital-level totals and merge with daily air pollution data. 
 
 @fig-hosp shows the frequency of accidents in hospitals []
 

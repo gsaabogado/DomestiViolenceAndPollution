@@ -223,7 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#wind-instrument" id="toc-wind-instrument" class="nav-link" data-scroll-target="#wind-instrument">Wind Instrument</a></li>
   <li><a href="#computing-the-daily-aqi" id="toc-computing-the-daily-aqi" class="nav-link" data-scroll-target="#computing-the-daily-aqi">Computing the daily AQI</a></li>
-  <li><a href="#summary-statistics-and-final-dataset-creation" id="toc-summary-statistics-and-final-dataset-creation" class="nav-link" data-scroll-target="#summary-statistics-and-final-dataset-creation">Summary Statistics and Final Dataset Creation</a></li>
+  <li><a href="#aggregating-accidents-to-total-daily-accidents-per-hospital" id="toc-aggregating-accidents-to-total-daily-accidents-per-hospital" class="nav-link" data-scroll-target="#aggregating-accidents-to-total-daily-accidents-per-hospital">Aggregating accidents to total daily accidents per hospital</a></li>
   </ul>
 </nav>
     </div>
@@ -796,19 +796,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p> = </p>
 <p>$$</p>
 <p>To create the AQI measure, we transform our ozone variable into particles per million and create an eight hour ozone rolling average. We further bound PM10 and PM25 to 500 units in order to avoid extremes. The AQI is defined as the daily maximum of CO, NO2, PM25, PM10, O3, SO2 and calculated according to the U.S. Environmental Protection Agency (EPA) documentation https://www.airnow.gov/sites/default/files/2020-05/aqi-technical-assistance-document-sept2018.pdf. The AQI index variable is categorized as good (0-50), moderate (51-100), unhealthy for sensitive groups (101-150), unhealthy (151-200), very unhealthy (201-300), and hazardous (301-500).</p>
-<p>#Clarify level of aggregation [Check with Luis: currently we’re taking the max of hourly pollutants for each pollutant, then max of this max for a given day]</p>
 <p>Finally, in order to create final air pollution dataset, we merge the pollution data with the inverse-distance weighted values and the daily AQI datasets together. Furthermore, we add the wind direction of the closest station.</p>
 <p>[TODO: Add sample table]</p>
 <p>#Create the final data set for the regressions</p>
-<p>In order to create our final dataset, we assign weighted pollution, precipitation, and wind instrument values to the hospitals based on the longitude and latitude. We first compute the distance between stations and hospitals and only select the five closest weather and pollution stations to each hospital. We then calculate the IDW value for each weather variable and merge all the pollution weighted values for each hospital. We further include the wind direction of the closest station and add the wind direction values, wind instrument, and rain and weather variables.</p>
-<section id="aggregate-the-accidents-data-to-total-daily-accidents-per-hospital" class="level4">
-<h4 class="anchored" data-anchor-id="aggregate-the-accidents-data-to-total-daily-accidents-per-hospital">Aggregate the accidents data to total daily accidents per hospital</h4>
-<p>Aggregate the accidents to hourly total accidents per hospital by type</p>
+<p>In order to create our final dataset, we assign weighted pollution, precipitation, and wind instrument values to the hospitals based on the longitude and latitude. We compute the distance between stations and hospitals and only select the five closest weather and pollution stations to each hospital. We then calculate the IDW value for each weather variable and merge all the pollution-weighted values for each hospital. We further include the wind direction of the closest station and add the wind direction values, wind instrument, and rain and weather variables.</p>
 </section>
-</section>
-<section id="summary-statistics-and-final-dataset-creation" class="level1">
-<h1>Summary Statistics and Final Dataset Creation</h1>
-<p>[ and focus more on summary statistics, etc. ]</p>
+<section id="aggregating-accidents-to-total-daily-accidents-per-hospital" class="level1">
+<h1>Aggregating accidents to total daily accidents per hospital</h1>
+<p>We aggregate accidents to daily hospital-level totals and merge with daily air pollution data.</p>
 <p><strong>?@fig-hosp</strong> shows the frequency of accidents in hospitals []</p>
 
 
